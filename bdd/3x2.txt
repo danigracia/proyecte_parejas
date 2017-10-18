@@ -1,13 +1,3 @@
-dani,7
-pepito,5
-ana,6
-juan,8
-jose,3
-lucas,4
-jordi,9
-genis,5
-enric,5
-alvaro,5
-alejandro,3
-eva,5
+dani,4
 crack,4
+jose,5

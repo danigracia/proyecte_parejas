@@ -63,7 +63,7 @@
     <div id="buttons">
         <a href='index.php'><button>Volver atras</button></a>
         <a onclick="reset()"><button id="botonRes">Reiniciar</button></a>
-        <a onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php echo $_GET["filas"];?>','<?php echo $_GET["col"];?>')"><button id="buttonSubmit" disabled>Guardar y ver puntuación</button></a>
+        <a onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php echo $_GET["filas"];?>','<?php echo $_GET["col"];?>')"><button id="buttonSubmit">Ver puntuación</button></a>
     </div>
     <div id="layer" style="display:none;">
         <form method="get" action="puntuacion.php">
@@ -71,6 +71,7 @@
             <input type="text" id="fil" name="fil" value="0"/>
             <input type="text" id="col" name="col" value="0"/>
             <input type="number" id="int" name="int" value="0"/>
+            <input type="number" id="win" name="win" value="0"/>
             <input id="submitPunt" type="submit" value="COMENZAR PARTIDA"/>
         </form>
     </div>

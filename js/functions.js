@@ -5,15 +5,17 @@ var intentos = 0; //numero de intentos de hacer parejas
 var parejasTotales; //numero de parejas totales que se pueden hacer
 var parejasEncontradas = 0; //numero de parejas encontradas
 var timeShowCard = 0; //tiempo que tardan las cartas en darse la vuelta cuando el usuario falla
+var win = 0; //saber si a ganado
 
 //funcion para reiniciar la partida
 function reset() {
     click = 0;
     intentos = 0;
     parejasEncontradas = 0;
+    win = 0;
     pintarDatosTabla();
-    document.getElementById("mensaje").innerHTML = "Suerte, la vas a necesitar";
-    document.getElementById("buttonSubmit").disabled = true;
+    document.getElementById("mensaje").innerHTML = "Suerte, la vas a necesitar!";
+    document.getElementById("buttonSubmit").innerHTML = "Ver puntuación";
     for(var i = 0; 0<parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
     }
@@ -72,7 +74,8 @@ function cogerIntentos() {
 function controlParejas() {
     if(parejasTotales==parejasEncontradas){
         document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos.";
-        document.getElementById("buttonSubmit").disabled = false;
+        document.getElementById("buttonSubmit").innerHTML = "Guardar y ver puntuación";
+        win = 1;
     }
 }
 
@@ -119,6 +122,7 @@ function darValuesSubmit(nom, col, fil) {
     document.getElementById("fil").setAttribute('value',fil);
     document.getElementById("col").setAttribute('value',col);
     document.getElementById("int").setAttribute('value',intentos);
+    document.getElementById("win").setAttribute('value',win);
     abrirPag();
 }
 

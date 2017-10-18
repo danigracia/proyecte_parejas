@@ -4,7 +4,7 @@
 <h4>MEMORI <?php echo $_GET["col"]." x ".$_GET["fil"];?></h4>
 <div id="tablaPuntuacion">
 <?php
-$intentos = $_GET["int"];
+$win = $_GET["win"];
 function guardarPuntuacion(){
     $fil = $_GET["fil"];
     $col = $_GET["col"];
@@ -43,11 +43,16 @@ function puntuacion(){
     echo "</table>
             </div><br>";
 }
-if($intentos>0){
+if($win>0){
     guardarPuntuacion();
+    puntuacion();
 }
-puntuacion();
+else{
+    puntuacion();
+    echo "<a href='javascript:history.back(-1);'><button>Volver atras</button></a>";
+}
+
 ?>
-    <a href='index.php'><button>Volver a crear partida</button></a>
+    <a href='index.php'><button>Crear nueva partida</button></a>
 </div>
 
