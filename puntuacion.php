@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="styles.css" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
 <script type="text/javascript" src="js/tablesorter.js"></script>
 
 <h4>MEMORI <?php echo $_GET["col"]." x ".$_GET["fil"];?></h4>

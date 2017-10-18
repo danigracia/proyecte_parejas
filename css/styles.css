@@ -95,7 +95,7 @@ tbody{
 
 #puntuacion table {
     margin: auto;
-    background: #000 url("img/gradient.gif") bottom left repeat-x;
+    background: #000 url("../img/gradient.gif") bottom left repeat-x;
     border-collapse: separate;
     border-spacing: 5px;
 }

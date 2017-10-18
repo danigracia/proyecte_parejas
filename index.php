@@ -1,29 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="style_form_initial.css" xmlns="http://www.w3.org/1999/html"/>
-        <script>
-            function openTab(tabName) {
-                if(tabName=="play")
-                    var tab = "tab1";
-                else{
-                    var tab = "tab2";
-                }
-                var i;
-                var x = document.getElementsByClassName("tabs");
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                document.getElementById(tabName).style.display = "block";
-                if(tab=="tab1"){
-                    document.getElementById(tab).setAttribute('class','tab activeTab');
-                    document.getElementById("tab2").setAttribute('class','tab');
-                }
-                else{
-                    document.getElementById(tab).setAttribute('class','tab activeTab');
-                    document.getElementById("tab1").setAttribute('class','tab');
-                }
-            }
-        </script>
+        <link rel="stylesheet" type="text/css" href="css/style_form_initial.css"/>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
 
     <body>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="styles.css" xmlns="http://www.w3.org/1999/html"/>
+<link rel="stylesheet" type="text/css" href="css/styles.css"/>
 <script type="text/javascript" src="js/functions.js"></script>
 
 <body>
@@ -67,10 +67,10 @@
     </div>
     <div id="layer" style="display:none;">
         <form method="get" action="puntuacion.php">
-            <input type="text" id="nombre" name="nom" value=""/>
-            <input type="text" id="fil" name="fil" value=""/>
-            <input type="text" id="col" name="col" value=""/>
-            <input type="number" id="int" name="int" value=""/>
+            <input type="text" id="nombre" name="nom" value="anonimo"/>
+            <input type="text" id="fil" name="fil" value="0"/>
+            <input type="text" id="col" name="col" value="0"/>
+            <input type="number" id="int" name="int" value="0"/>
             <input id="submitPunt" type="submit" value="COMENZAR PARTIDA"/>
         </form>
     </div>

@@ -113,6 +113,7 @@ function controlCheckBack(numCarta) {
     document.getElementById("check"+numCarta+"").checked = false;
 }
 
+//funcion para dar valor a los campos del formulario oculto y
 function darValuesSubmit(nom, col, fil) {
     document.getElementById("nombre").setAttribute('value',nom);
     document.getElementById("fil").setAttribute('value',fil);
@@ -121,6 +122,7 @@ function darValuesSubmit(nom, col, fil) {
     abrirPag();
 }
 
+//funcion para hacer click en el boton  enviar los valores al servidor para guardar la puntuacion
 function abrirPag() {
     document.getElementById("submitPunt").click();
 }

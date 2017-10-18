@@ -1,3 +1,4 @@
+//funcion para Ordenar de forma ascendente por puntos
 function intAscendente() {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("puntuacion");
@@ -21,6 +22,7 @@ function intAscendente() {
     }
 }
 
+//funcion para Ordenar de forma Descendente por puntos
 function intDescendente() {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("puntuacion");
@@ -44,6 +46,7 @@ function intDescendente() {
     }
 }
 
+//funcion para Ordenar de forma Descendente por nombre
 function nomDescendente() {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("puntuacion");
@@ -67,6 +70,7 @@ function nomDescendente() {
     }
 }
 
+//funcion para Ordenar de forma ascendente por nombre
 function nomAscendente() {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("puntuacion");
