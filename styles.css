@@ -1,0 +1,114 @@
+body{
+    background-color: #F6F4F4;
+}
+
+label {
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.card {
+    position: relative;
+    height: 120px;
+    width: 200px;
+    margin-bottom: 15px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 600ms;
+    transition: all 600ms;
+    z-index: 20;
+}
+
+.card div {
+    position: absolute;
+    height: 105%;
+    width: 100%;
+    background: #FFF;
+    text-align: center;
+    line-height: 200px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card .back {
+    height: 125.5px;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+label:hover .card {
+    -webkit-transform: rotateX(20deg);
+    transform: rotateX(20deg);
+    box-shadow: 0 10px 10px rgba(50,50,50,.2);
+}
+
+input {
+    display: none;
+}
+
+:checked + .card {
+    transform: rotateX(180deg);
+    -webkit-transform: rotateX(180deg);
+}
+
+label:hover :checked + .card {
+    transform: rotateX(160deg);
+    -webkit-transform: rotateX(160deg);
+    box-shadow: 0 10px 10px rgba(255,255,255,.2);
+}
+
+h3{
+    text-align: center;
+}
+
+tbody{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+}
+
+.datosth {
+    background-color: #F6F4F4;
+    color: #000;
+    text-align: center;
+    padding: 10px;
+}
+
+.datostd {
+    background-color: #F6F4F4;
+    color: #000;
+    text-align: center;
+    padding: 3px;
+}
+
+#tablaCartas table {
+    margin: auto;
+}
+
+#puntuacion table {
+    margin: auto;
+    background: #000 url("img/gradient.gif") bottom left repeat-x;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+p.img{
+    margin-top: 0px;
+}
+
+h4{
+    background-color: black;
+    opacity: 0.65;
+    color: white;
+    text-align: center;
+    height: 60px;
+    padding: 0 auto;
+}
