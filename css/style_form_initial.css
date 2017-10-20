@@ -53,7 +53,7 @@ a{
 .tab{
     float:left;
     height:60px;
-    width:50%;
+    width:100%;
     padding-top:20px;
     box-sizing:border-box;
     background:#eeeeee;
@@ -136,4 +136,27 @@ a{
 
 #conf{
     display: none;
+}
+
+select {
+    height:40px;
+    width: 90%;
+    border:rgba(0,0,0,.3) 2px solid;
+    border-radius:3px;
+    box-sizing:border-box;
+    margin-left:5px;
+    margin-bottom: 20px;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    cursor:pointer;
+}
+
+
+label {
+    width: 100%;
+    padding: 10px;
+    border-radius:4px;
+
 }

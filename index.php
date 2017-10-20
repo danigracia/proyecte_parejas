@@ -9,13 +9,20 @@
             <div class="module">
                 <ul>
                     <li class="tab activeTab" id="tab1" onclick="openTab('play')"><img src="img/play.png" alt="" class="icon"/></li>
-                    <li class="tab" id="tab2" onclick="openTab('conf')"><img src="img/config.png" alt="" class="icon"/></li>
+                    <!-- Otro tab de momento no usado (cambiar classe "tab" para usar correctamente)
+                        <li class="tab" id="tab2" onclick="openTab('conf')"><img src="img/config.png" alt="" class="icon"/></li>
+                        -->
                 </ul>
 
                 <form class="form tabs" id="play" method="get" action="functions.php">
                     <input type="text" name="nombre" placeholder="Nombre" class="textbox" required/><br><br>
-                    <input type="number" name="filas" min="1" max="10" placeholder="Filas" class="textbox" required/><br><br>
-                    <input type="number" name="col" min="1" max="10" placeholder="Columnas" class="textbox" required/><br><br>
+                    <label>
+                        <select name="option">
+                            <option value="4x4" selected>4x4</option>
+                            <option value="6x6">6x6</option>
+                            <option value="8x8">8x8</option>
+                        </select>
+                    </label>
                     <input type="number" name="time" min="1" max="5" placeholder="Tiempo mostrar parejas fallidas(s)" class="textbox" required/><br><br>
                     <input class="button" type="submit" value="COMENZAR PARTIDA"/>
                 </form>
