@@ -14,21 +14,27 @@
             <a href='index.php'><img class="btn" src="img/atras.png"/></a>
             <img class="btn" onclick="reset()" id="botonRes" src="img/reset.png"/>
             <img class="btn" src="img/table.png" id="buttonSubmit" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[1];?>')"/>
-            <img class="btn" onclick="mostrarCartas()" id="ayuda" src="img/help.png"/>
+            <img class="btn" onclick="" id="ayuda" src="img/help.png"/>
+            <img class="btn" onclick="pauseTime()" id="pause" src="img/pause-btn.png"/>
         </div>
         <a id="a">MEMORI <?php $valores = explode("x",$_GET["option"]); echo $valores[0]." x ".$valores[1];?></a>
-        <div class="module">
+        <div id="btn-start" class="module">
+            <img class="btn center" onclick="startTime()" id="start" src="img/play-btn.png"/>
+        </div>
+        <div id="tablero" class="module">
             <div class="mensaje">
                 <h4><p id="mensaje">Suerte, la vas a necesitar!</p></h4>
                 <h4>
-                    <p class="div-3">Intentos: <span id="intentos">0</span></p>
-                    <p class="div-3">Parejas: <span id="parejas">0</span></p>
-                    <p class="div-3">Ayudas restantes: <span id="ayudas">3</span></p>
+                    <p class="div-4">Intentos: <span id="intentos">0</span></p>
+                    <p class="div-4">Parejas: <span id="parejas">0</span></p>
+                    <p class="div-4">Ayudas restantes: <span id="ayudas">3</span></p>
+                    <p class="div-4">Tiempo: <span id="tiempo">0</span> s</p>
                 </h4>
             </div>
             <div id="tablaCartas">
                 <table>
                     <?php
+                    session_start();
                     $name = $_GET["nombre"];
                     function mezclarCartas($array_cartas){
                         shuffle($array_cartas);
@@ -50,7 +56,15 @@
                                 array_push($array_cartas, $a);
                                 array_push($array_cartas, $a);
                             }
-                            $array_cartas = mezclarCartas($array_cartas);
+
+                            if (isset($_SESSION['arrayCartas'])){
+                                $array_cartas = $_SESSION['arrayCartas'];
+                            }
+                            else {
+                                $array_cartas = mezclarCartas($array_cartas);
+                                $_SESSION['arrayCartas'] = $array_cartas;
+                            }
+
                             $ar = 0;
                             for( $i=1 ; $i <= $col; $i++ ) {
                                 for ($j = 0; $j < $filas; $j++) {;
@@ -88,6 +102,7 @@
             <input type="text" id="columnas" name="col" value="0"/>
             <input type="number" id="int" name="int" value="0"/>
             <input type="number" id="ganadas" name="win" value="0"/>
+            <input type="number" id="segundos" name="seg" value="0"/>
             <input id="submitPunt" type="submit" value="COMENZAR PARTIDA"/>
         </form>
     </div>

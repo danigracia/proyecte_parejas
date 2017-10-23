@@ -240,7 +240,9 @@ h4{
     top:15px;
     height:880px;
     width:1400px;
-    background:url('https://i.imgur.com/3eP9Z4O.png') center no-repeat;
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
     background-size:cover;
     margin-left:auto;
     margin-right:auto;
@@ -270,8 +272,8 @@ h4{
     text-align:center;
 }
 
-.div-3{
-    width: 33%;
+.div-4{
+    width: 20%;
     display: inline-block;
 }
 
@@ -301,4 +303,17 @@ h4{
 
 .btn{
     border-radius: 35px;
+}
+
+#btn-start{
+    margin: 22px 140px;
+    position: absolute;
+    opacity: 0.9;
+    z-index: 30;
+}
+
+.center{
+    opacity: 1;
+    margin-top: 255px;
+    margin-left: 430px;
 }

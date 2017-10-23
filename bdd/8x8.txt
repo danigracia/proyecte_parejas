@@ -1,1 +1,9 @@
-dani,50
+dani,20,67
+Jordi,17,55
+dfdfa,27,34
+dddsawa,28,57
+dssaa,18,45
+dsa,18,79
+daniel,18,41
+perico,26,60
+dani,50,144

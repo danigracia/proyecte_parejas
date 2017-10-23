@@ -2,6 +2,11 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style_form_initial.css"/>
         <script type="text/javascript" src="js/index.js"></script>
+        <?php
+            session_start();
+            if (isset($_SESSION['arrayCartas'])){
+                unset($_SESSION['arrayCartas']);
+            }?>
     </head>
 
     <body>
@@ -9,9 +14,6 @@
             <div class="module">
                 <ul>
                     <li class="tab activeTab" id="tab1" onclick="openTab('play')"><img src="img/play.png" alt="" class="icon"/></li>
-                    <!-- Otro tab de momento no usado (cambiar classe "tab" para usar correctamente)
-                        <li class="tab" id="tab2" onclick="openTab('conf')"><img src="img/config.png" alt="" class="icon"/></li>
-                        -->
                 </ul>
 
                 <form class="form tabs" id="play" method="get" action="functions.php">
@@ -26,9 +28,9 @@
                     <input type="number" name="time" min="1" max="5" placeholder="Tiempo mostrar parejas fallidas(s)" class="textbox" required/><br><br>
                     <input class="button" type="submit" value="COMENZAR PARTIDA"/>
                 </form>
-                <div id="conf" class="tabs">
-                    <h1>config tab</h1>
-                </div>
+            </div>
+            <div class="but-des">
+                <button onclick="destroy()" class="button">Destruir Session PHP</button>
             </div>
         </div>
 
@@ -36,4 +38,9 @@
         <a>Copyright © 2017 All right reserved.</a>
 
     </body>
+    <script>
+        function destroy(){
+            session_destroy();
+        }
+    </script>
 </html>

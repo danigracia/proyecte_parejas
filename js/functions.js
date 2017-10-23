@@ -10,6 +10,8 @@ var ayudas = 3;
 var arrayEncontradas = [];
 var tamCarta = "carta4";
 var card = 0;
+var segundos = 1;
+var contador = null;
 //funcion para reiniciar la partida
 frontDispay();
 function reset() {
@@ -19,9 +21,12 @@ function reset() {
     win = 0;
     ayudas = 3;
     pintarDatosTabla();
+    clearInterval(contador);
     document.getElementById("mensaje").innerHTML = "Suerte, la vas a necesitar!";
-    document.getElementById("ayuda").disabled = false;
+    document.getElementById("tiempo").innerHTML = "0";
+    document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("buttonSubmit").setAttribute("src","img/table.png");
+    document.getElementById("btn-start").setAttribute("class","module");
     display();
     for(var i = 0; 0<parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
@@ -79,9 +84,10 @@ function cogerIntentos() {
 function controlParejas() {
     if(parejasTotales==parejasEncontradas){
         setTimeout(sWin,320);
-        document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos.";
+        document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos y " + segundos + "segundos.";
         document.getElementById("buttonSubmit").setAttribute("src","img/save.png");
         win++;
+        pauseTime();
     }
 }
 
@@ -94,7 +100,7 @@ function controlCheckFront(numCarta, numPos) {
         numeroCarta = numCarta;
         numPosPrimClick = numPos;
         document.getElementById(numPosPrimClick+"").setAttribute("class","none-display "+tamCarta);
-        document.getElementById("ayuda").disabled = true;
+        document.getElementById("ayuda").removeAttribute("onclick");
     }
 
     else if(click==2){
@@ -118,7 +124,7 @@ function controlCheckFront(numCarta, numPos) {
         pintarDatosTabla();
         controlParejas();
         frontDispay();
-        document.getElementById("ayuda").disabled = false;
+        document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
     }
     //entra cuando el usuario intenta clicar en mas cartas seguidamente sin dar tiempo a que la animacion de darse la vuelta
     //haya transcurrido para evitar errores
@@ -139,8 +145,8 @@ function darValuesSubmit(nom, col, fil) {
     document.getElementById("filas").setAttribute('value',fil);
     document.getElementById("columnas").setAttribute('value',col);
     document.getElementById("int").setAttribute('value',intentos);
-    if(win==1)
-    document.getElementById("ganadas").setAttribute('value','1');
+    if(win==1)document.getElementById("ganadas").setAttribute('value','1');
+    document.getElementById("segundos").setAttribute('value',segundos);
     abrirPag();
 }
 
@@ -187,6 +193,8 @@ function borrarBorde(numPos) {
 
 function mostrarCartas() {
     ayudas--;
+    document.getElementById("ayuda").removeAttribute("onclick");
+    document.getElementById("pause").removeAttribute("onclick");
     document.getElementById("ayuda").disabled = true;
     if(ayudas>=0){
         for(var i = 0; i < parejasTotales*2;i++){
@@ -202,7 +210,8 @@ function mostrarCartas() {
 }
 
 function ocultarCartas() {
-
+    document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
+    document.getElementById("pause").setAttribute("onclick","pauseTime()");
     for(var i = 0; i < parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
     }
@@ -258,9 +267,27 @@ function tamCard(tam) {
     card = tam;
 }
 function cambiarTamCartas() {
+
     for(var i = 0; i < parejasTotales * 2; i++){
         document.getElementById("tamCarta"+i).setAttribute("class","card"+card);
     }
     display();
-    
+}
+
+function startTime() {
+    document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
+    document.getElementById("pause").setAttribute("onclick","pauseTime()");
+    document.getElementById("btn-start").setAttribute("class","none-display");
+    segundos = segundos++;
+    contador = setInterval(function(){
+        document.getElementById("tiempo").innerHTML = segundos;
+        segundos++;
+    },1000);
+}
+
+function pauseTime() {
+    document.getElementById("ayuda").removeAttribute("onclick");
+    document.getElementById("btn-start").setAttribute("class","module");
+    document.getElementById("pause").removeAttribute("onclick");
+    clearInterval(contador);
 }

@@ -21,8 +21,8 @@ a{
 #bg{
     position:relative;
     top:20px;
-    height:600px;
-    width:800px;
+    height:800px;
+    width:900px;
     background-image: url("../img/bg.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -34,9 +34,9 @@ a{
 
 .module{
     position:relative;
-    top:15%;
-    height:70%;
-    width:450px;
+    top:5%;
+    height:600px;
+    width:500px;
     margin-left:auto;
     margin-right:auto;
     border-radius:5px;
@@ -55,26 +55,27 @@ a{
 .tab{
     float:left;
     height:60px;
-    width:100%;
+    width:50%;
     padding-top:20px;
     box-sizing:border-box;
     background:#eeeeee;
     text-align:center;
     cursor:pointer;
     transition:background .4s;
+    border-radius: 5px;
 }
 
-.tab:first-child{
+.tab li:first-child{
     -webkit-border-radius: 5px 0px 0px 0px;
     border-radius: 5px 0px 0px 0px;
 }
 
-.tab:last-child{
+.tab li:last-child{
     -webkit-border-radius: 0px 5px 0px 0px;
     border-radius: 0px 5px 0px 0px;
 }
 
-.tab:hover{
+.tab li:hover{
     background-color:rgba(0,0,0,.1);
 }
 
@@ -86,43 +87,24 @@ a{
     opacity:1;
 }
 
-.icon{
-    height:24px;
-    width:24px;
-    opacity:.2;
-}
-
-.form{
-    float:left;
-    height:86%;
-    width:100%;
-    box-sizing:border-box;
-    padding:40px;
-}
-
-.textbox{
-    height:40px;
-    width: 90%;
-    border-radius:3px;
-    border:rgba(0,0,0,.3) 2px solid;
-    box-sizing:border-box;
-    padding:2px;
-    margin: 0 15px;
-}
-
-.textbox:focus{
-    outline:none;
-    border:rgba(24,149,215,1) 2px solid;
-    color:rgba(24,149,215,1);
+.tabcontent {
+    height: 526px;
+    display: none;
+    padding: 6px 12px;
+    margin-top: 15px;
+    overflow-y: scroll;
 }
 
 .button{
     height:50px;
-    width:100%;
+    width:20%;
+    margin-top: 20px;
+    float: left;
     border-radius:3px;
     border:rgba(0,0,0,.3) 0px solid;
     box-sizing:border-box;
     padding:10px;
+    margin-left: 20px;
     margin-bottom:30px;
     background:#90c843;
     color:#FFF;
@@ -130,6 +112,8 @@ a{
     font-size: 12pt;
     transition:background .4s;
     cursor:pointer;
+    text-align: center;
+
 }
 
 .button:hover{
@@ -160,9 +144,61 @@ label {
     width: 100%;
     padding: 10px;
     border-radius:4px;
+
 }
 
-.but-des{
-    width: 200px;
-    margin: 110 auto;
+#puntuacion table {
+    margin: auto;
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border-radius: 5px;
 }
+
+#puntuacionSession table {
+    margin: auto;
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border-radius: 5px;
+}
+
+tbody{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    -webkit-box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
+    box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
+}
+
+.datosth {
+    background-color: #F6F4F4;
+    color: #000;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.datostd {
+    background-color: #F6F4F4;
+    color: #000;
+    text-align: center;
+    padding: 3px;
+    border-radius: 5px;
+
+}
+
+.none-display{
+    display: none;
+}
+
+/* Style the tab content */
+
