@@ -4,17 +4,19 @@ var numPosPrimClick; //numero de posicion de la carta del primer click
 var intentos = 0; //numero de intentos de hacer parejas
 var parejasTotales; //numero de parejas totales que se pueden hacer
 var parejasEncontradas = 0; //numero de parejas encontradas
-var timeShowCard = 0; //tiempo que tardan las cartas en darse la vuelta cuando el usuario falla
+var tiempoMostrarCarta = 0; //tiempo que tardan las cartas en darse la vuelta cuando el usuario falla
 var win = 0; //saber si a ganado
-var ayudas = 3;
-var arrayEncontradas = [];
-var tamCarta = "carta4";
-var card = 0;
-var segundos = 1;
-var minutos = 0;
-var contador = null;
+var ayudas = 3; //cantidad de veces que podemos dar al boton de ayuda en la misma partida
+var arrayEncontradas = []; //lista con las parejas encontradas (se utiliza para el boton de ayuda)
+var tamCarta = "carta4"; //define el tamaño de la carta dependiendo de la eleccion del usuario
+var card = 0; //numero del tamaño de la carta(se utiliza para definir estilos con el css)
+var segundos = 1;//segundos para el cronometro
+var minutos = 0;//minutos para el cronometro
+var contador = null;//variable para saber si el cronometro esta en marxa o parado.
+
+mostrarCaraCarta();
+
 //funcion para reiniciar la partida
-frontDispay();
 function reset() {
     clearInterval(contador);
     contador = null;
@@ -33,16 +35,16 @@ function reset() {
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("buttonSubmit").setAttribute("src","img/table.png");
     document.getElementById("btn-start").setAttribute("class","module2");
-    display();
+    mostrarDetrasCartas();
     for(var i = 0; 0<parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
     }
 }
 
-//funcion llamada desde functions.php para pasar los valores de timeShowCard y parejasTotales que ha elegido el usuario
-function pasarVar(cantidadParejas, tiempoMostrarCarta) {
+//funcion llamada desde functions.php para pasar los valores de tiempoMostrarCarta y parejasTotales que ha elegido el usuario
+function pasarVar(cantidadParejas, tiemMostrarCarta) {
     parejasTotales = cantidadParejas;
-    timeShowCard = tiempoMostrarCarta;
+    tiempoMostrarCarta = tiemMostrarCarta;
 }
 
 //funcion que pinta los intentos y parejas actuales
@@ -63,18 +65,18 @@ function darVueltaCartas(numPos) {
 
 //funcion que pinta un mensaje cuando el usuario hace una pareja
 function pintarAcierto() {
-    setTimeout(sAcierto,320);
+    setTimeout(sonidoAcierto,320);
     document.getElementById("mensaje").innerHTML = "Has echo una pareja!";
 }
 
 //funcion que pinta un mensaje cuando el usuario se ha equivocado
 function pintarFallo() {
-    setTimeout(sError,320);
+    setTimeout(sonidoFallo,320);
     document.getElementById("mensaje").innerHTML = "Te has equivocado!";
 }
 
 //funcion para comprobar si las cartas que ha girado el usuario son iguales o no
-function checkPar(numCarta) {
+function comprobarPareja(numCarta) {
     if(numCarta===numeroCarta){
         return true;
     }
@@ -84,12 +86,12 @@ function checkPar(numCarta) {
 //funcion que controla cuando el usuario ha encontrado todas las parejas posibles y pinta un mensaje para felicitarle.
 function controlParejas() {
     if(parejasTotales==parejasEncontradas){
-        setTimeout(sWin,320);
+        setTimeout(sonidoVictoria,320);
         document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos";
         win++;
-        pauseTime();
-        showButSave();
-        blockButtons();
+        pausa();
+        mostrarBotonGuardar();
+        bloquearBotones();
     }
 }
 
@@ -98,10 +100,10 @@ function controlCheckFront(numCarta, numPos) {
     click++;
     if(click==1){
         // aqui entra en el 1r click
-        sFirstClick();
+        sonidoPrimerClick();
         numeroCarta = numCarta;
         numPosPrimClick = numPos;
-        document.getElementById(numPosPrimClick+"").setAttribute("class","none-display "+tamCarta);
+        document.getElementById(numPosPrimClick+"").setAttribute("class","none-display");
         document.getElementById("ayuda").removeAttribute("onclick");
     }
 
@@ -109,23 +111,23 @@ function controlCheckFront(numCarta, numPos) {
         // 2o click
         numPosSegClick = numPos;
         document.getElementById(numPos+"").setAttribute("class","carta none-display");
-        sSecondClick();
-        if(checkPar(numCarta)== true){
+        sonidoSegundoClick();
+        if(comprobarPareja(numCarta)== true){
             pintarAcierto();
             borderAcierto(numPos);
             parejasEncontradas++;
             click=0;
         }
-        else if (checkPar(numCarta)== false){
+        else if (comprobarPareja(numCarta)== false){
             pintarFallo();
             borderFallo(numPos);
-            setTimeout(darVueltaCartas,timeShowCard*1000,numPos);
+            setTimeout(darVueltaCartas,tiempoMostrarCarta*1000,numPos);
         }
-        setTimeout(borrarBorde,timeShowCard*900,numPos);
+        setTimeout(borrarBorde,tiempoMostrarCarta*900,numPos);
         intentos++;
         pintarDatosPartida();
         controlParejas();
-        frontDispay();
+        mostrarCaraCarta();
         document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
     }
     //entra cuando el usuario intenta clicar en mas cartas seguidamente sin dar tiempo a que la animacion de darse la vuelta
@@ -141,12 +143,13 @@ function controlCheckBack(numCarta) {
     document.getElementById("check"+numCarta+"").checked = false;
 }
 
-//funcion para dar valor a los campos del formulario oculto y
+//funcion para dar valor a los campos del formulario oculto y enviarlos a la pagina de puntuacion.
 function darValuesSubmit(nom, col, fil) {
     document.getElementById("nombre").setAttribute('value',nom);
     document.getElementById("filas").setAttribute('value',fil);
     document.getElementById("columnas").setAttribute('value',col);
     document.getElementById("int").setAttribute('value',intentos);
+    document.getElementById("segundos").setAttribute('value',segundos);
     if(win==1){
         document.getElementById("ganadas").setAttribute('value','1');
     }
@@ -154,35 +157,52 @@ function darValuesSubmit(nom, col, fil) {
         minutos--;
         segundos+= 60;
     }
-    document.getElementById("segundos").setAttribute('value',segundos);
-    abrirPag();
-}
-
-//funcion para hacer click en el boton  enviar los valores al servidor para guardar la puntuacion
-function abrirPag() {
     document.getElementById("submitPunt").click();
 }
 
-function sFirstClick() {
+//------sonidos Inicio
+function desactivarSonido() {
+    document.getElementById("btnVolum").setAttribute("src","img/speakerMuted.png");
+    document.getElementById("btnVolum").setAttribute("onclick","activarSonido()");
+    document.getElementById("first-click").muted = true;
+    document.getElementById("second-click").muted = true;
+    document.getElementById("acierto").muted = true;
+    document.getElementById("error").muted = true;
+    document.getElementById("win").muted = true;
+}
+
+function activarSonido() {
+    document.getElementById("btnVolum").setAttribute("src","img/speakerOn.png");
+    document.getElementById("btnVolum").setAttribute("onclick","desactivarSonido()");
+    document.getElementById("first-click").muted = false;
+    document.getElementById("second-click").muted = false;
+    document.getElementById("acierto").muted = false;
+    document.getElementById("error").muted = false;
+    document.getElementById("win").muted = false;
+}
+
+function sonidoPrimerClick() {
     document.getElementById("first-click").play();
 }
 
-function sSecondClick() {
+function sonidoSegundoClick() {
     document.getElementById("second-click").play();
 }
 
-function sError() {
+function sonidoFallo() {
     document.getElementById("error").play();
 }
 
-function sAcierto() {
+function sonidoAcierto() {
     document.getElementById("acierto").play();
 }
 
-function sWin() {
+function sonidoVictoria() {
     document.getElementById("win").play();
 }
+//------sonidos FIN!!!
 
+//pintar colores border y borrar Inicio
 function borderAcierto(numPos) {
     document.getElementById("0"+numPosPrimClick).setAttribute("class","border-acierto "+tamCarta);
     document.getElementById("0"+numPos).setAttribute("class","border-acierto "+tamCarta);
@@ -198,7 +218,9 @@ function borrarBorde(numPos) {
         document.getElementById("0"+i).setAttribute("class","border "+tamCarta);
     }
 }
+//pintar colores bordes FIN!!!
 
+//se ejecuta cuando clicas sobre el boton de ayuda, almacena en una array la posicion de las parejas encontradas y le da la vuelta al resto
 function mostrarCartas() {
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("pause").removeAttribute("onclick");
@@ -217,9 +239,10 @@ function mostrarCartas() {
     }
 }
 
+//se ejecuta cuando pasan 3 segundos despues de haber clicado el boton de ayuda
 function ocultarCartas() {
     document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
-    document.getElementById("pause").setAttribute("onclick","pauseTime()");
+    document.getElementById("pause").setAttribute("onclick","pausa()");
     for(var i = 0; i < parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
     }
@@ -237,55 +260,38 @@ function ocultarCartas() {
     pintarDatosPartida();
 }
 
-function soundMuted() {
-    document.getElementById("btnVolum").setAttribute("src","img/speakerMuted.png");
-    document.getElementById("btnVolum").setAttribute("onclick","soundOn()");
-    document.getElementById("first-click").muted = true;
-    document.getElementById("second-click").muted = true;
-    document.getElementById("acierto").muted = true;
-    document.getElementById("error").muted = true;
-    document.getElementById("win").muted = true;
-}
-
-function soundOn() {
-    document.getElementById("btnVolum").setAttribute("src","img/speakerOn.png");
-    document.getElementById("btnVolum").setAttribute("onclick","soundMuted()");
-    document.getElementById("first-click").muted = false;
-    document.getElementById("second-click").muted = false;
-    document.getElementById("acierto").muted = false;
-    document.getElementById("error").muted = false;
-    document.getElementById("win").muted = false;
-}
-
-function frontDispay() {
+//funciones para jugar con el display de las cartas estas dos las muestran
+function mostrarCaraCarta() {
     for(var i = 0; i < parejasTotales * 2; i++){
         document.getElementById(""+i).setAttribute("class","border "+tamCarta);
     }
 }
 
-function display(){
+function mostrarDetrasCartas(){
     for(var i = 0; i < parejasTotales * 2; i++){
         document.getElementById(i+"").setAttribute("class","border "+tamCarta);
         document.getElementById("0"+i).setAttribute("class","border "+tamCarta);
     }
 }
 
+//se usa para coger el valor del tamaño de la carta del php
 function tamCard(tam) {
     tamCarta = "carta"+tam;
     card = tam;
 }
 
+//redimensiona el tamaño de las cartas dependiendo de la eleccion de la cantidad de cartas en pantalla
 function cambiarTamCartas() {
-
     for(var i = 0; i < parejasTotales * 2; i++){
         document.getElementById("tamCarta"+i).setAttribute("class","card"+card);
     }
-    display();
+    mostrarDetrasCartas();
 }
 
-function startTime() {
+//comenzar a contar el tiempo
+function comenzar() {
     document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
-    document.getElementById("pause").setAttribute("onclick","pauseTime()");
+    document.getElementById("pause").setAttribute("onclick","pausa()");
     document.getElementById("btn-start").setAttribute("class","none-display");
     segundos = segundos++;
     contador = setInterval(function(){
@@ -310,23 +316,23 @@ function startTime() {
     },1000);
 }
 
-function pauseTime() {
+//pausar tiempo
+function pausa() {
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("btn-start").setAttribute("class","module2");
     document.getElementById("pause").removeAttribute("onclick");
     clearInterval(contador);
 }
-
-function showButSave(){
+//muestra el boton guardar y oculta el boton de comenzar una vez has ganado
+function mostrarBotonGuardar(){
     document.getElementById("btn-save").setAttribute("class", "module2");
     document.getElementById("btn-start").removeAttribute("class");
     document.getElementById("btn-start").setAttribute("class", "none-display");
 }
 
-function blockButtons() {
+//bloquea los botones que no quiero que se usen cuando el usuario realiza ciertas acciones
+function bloquearBotones() {
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("pause").removeAttribute("onclick");
     document.getElementById("botonRes").removeAttribute("onclick");
-
-
 }

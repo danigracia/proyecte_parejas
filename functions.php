@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 <script type="text/javascript" src="js/functions.js"></script>
-<title>Game</title>
+<title>Juego Parejas</title>
 
 <head>
     <audio id="first-click" src="sound/primerClickReload.wav" preload="auto"></audio>
@@ -12,19 +12,19 @@
 <body onload="cambiarTamCartas()">
     <div id="bg">
         <div id="btns">
-            <img class="btn" id="btnVolum" onclick="soundMuted()" src="img/speakerOn.png"/>
+            <img class="btn" id="btnVolum" onclick="desactivarSonido()" src="img/speakerOn.png"/>
             <a href='index.php'><img class="btn" src="img/atras.png"/></a>
             <img class="btn" onclick="reset()" id="botonRes" src="img/reset.png"/>
-            <img class="btn" src="img/table.png" id="buttonSubmit" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[1];?>')"/>
+            <img class="btn" src="img/table.png" id="buttonSubmit" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["opcion"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["opcion"]; $valores = explode("x",$option); echo $valores[1];?>')"/>
             <img class="btn" onclick="" id="ayuda" src="img/help.png"/>
-            <img class="btn" onclick="pauseTime()" id="pause" src="img/pause-btn.png"/>
+            <img class="btn" onclick="pausa()" id="pause" src="img/pause-btn.png"/>
         </div>
-        <a id="a">MEMORI <?php $valores = explode("x",$_GET["option"]); echo $valores[0]." x ".$valores[1];?></a>
+        <a id="a">MEMORI <?php $valores = explode("x",$_GET["opcion"]); echo $valores[0]." x ".$valores[1];?></a>
         <div id="btn-start" class="module2">
-            <img class="btn center" onclick="startTime()" id="start" src="img/play-btn.png"/>
+            <img class="btn center" onclick="comenzar()" id="start" src="img/play-btn.png"/>
         </div>
         <div id="btn-save" class="module2 none-display">
-            <img id="save" class="btn center" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[1];?>')" src="img/save.png"/>
+            <img id="save" class="btn center" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["opcion"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["opcion"]; $valores = explode("x",$option); echo $valores[1];?>')" src="img/save.png"/>
         </div>
 
         <div id="tablero" class="module">
@@ -48,14 +48,14 @@
                     }
 
                     function generarCartas(){
-                        $option = $_GET["option"];
+                        $option = $_GET["opcion"];
                         $valores = explode("x",$option);
                         $filas = $valores[0];
                         $col = $valores[1];
                         echo "<script>tamCard($filas);</script>";
 
                         if($filas*$col%2==0){
-                            $timeShowCards = $_GET["time"];
+                            $tiempoMostrarCartas = $_GET["tiempo"];
                             $total_parejas = $filas*$col/2;
                             $array_cartas = array();
                             for( $a = 1; $a<=$total_parejas;$a++){
@@ -71,24 +71,24 @@
                                 $_SESSION['arrayCartas'] = $array_cartas;
                             }
 
-                            $ar = 0;
+                            $posicion = 0;
                             for( $i=1 ; $i <= $col; $i++ ) {
                                 for ($j = 0; $j < $filas; $j++) {;
                                     echo "<td id='clicks'>
                                 <label>
-                                    <input type='checkbox' id='check".$ar."'/>
-                                    <div id='tamCarta$ar' class=''>
-                                        <div class='front'><p class='img'><img class='border none-display' id='".$ar."' onclick='controlCheckFront($array_cartas[$ar], $ar)' src='img/carta.jpe'></p></div>
-                                        <div class='back'><p class='img'><img class='border none-display' id='0".$ar."' onclick='controlCheckBack($ar)' src='img/par".$array_cartas[$ar].".jpg'></p></div>
+                                    <input type='checkbox' id='check".$posicion."'/>
+                                    <div id='tamCarta$posicion' class=''>
+                                        <div class='front'><p class='img'><img class='border none-display' id='".$posicion."' onclick='controlCheckFront($array_cartas[$posicion], $posicion)' src='img/carta.jpe'></p></div>
+                                        <div class='back'><p class='img'><img class='border none-display' id='0".$posicion."' onclick='controlCheckBack($posicion)' src='img/par".$array_cartas[$posicion].".jpg'></p></div>
                                     </div>
                                 </label>
                               </td>\n";
-                                    $ar++;
+                                    $posicion++;
                                 }
 
                                 echo "</tr>\n";
                             }
-                            echo "<script>pasarVar($total_parejas ,$timeShowCards)</script>";
+                            echo "<script>pasarVar($total_parejas ,$tiempoMostrarCartas)</script>";
                         }
                         else{
                             echo "No se puede generar esta partida porque $filas x $col da un resultado impar<br> y no se podrian resolver todas las parejas.<br>";

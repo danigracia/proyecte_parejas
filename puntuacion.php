@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/style_table.css" />
 <script type="text/javascript" src="js/tablesorter.js"></script>
-<title>Ranking</title>
+<title>Puntuación</title>
 
 
 <body>

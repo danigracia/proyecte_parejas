@@ -2,7 +2,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style_form_initial.css"/>
         <script type="text/javascript" src="js/index.js"></script>
-        <title>New game</title>
+        <title>Nueva partida</title>
         <?php
             session_start();
             if (isset($_SESSION['arrayCartas'])){
@@ -20,13 +20,13 @@
                 <form class="form tabs" id="play" method="get" action="functions.php">
                     <input type="text" name="nombre" placeholder="Nombre" class="textbox" required/><br><br>
                     <label>
-                        <select name="option">
+                        <select name="opcion">
                             <option value="4x4" selected>4x4</option>
                             <option value="6x6">6x6</option>
                             <option value="8x8">8x8</option>
                         </select>
                     </label>
-                    <input type="number" name="time" min="1" max="5" placeholder="Tiempo mostrar parejas fallidas(s)" class="textbox" required/><br><br>
+                    <input type="number" name="tiempo" min="1" max="5" placeholder="Tiempo mostrar parejas fallidas(s)" class="textbox" required/><br><br>
                     <input class="button" type="submit" value="COMENZAR PARTIDA"/>
                 </form>
             </div>
