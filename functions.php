@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 <script type="text/javascript" src="js/functions.js"></script>
+<title>Game</title>
+
 <head>
     <audio id="first-click" src="sound/primerClickReload.wav" preload="auto"></audio>
     <audio id="second-click" src="sound/segundoClickShoot.wav" preload="auto"></audio>
@@ -18,9 +20,13 @@
             <img class="btn" onclick="pauseTime()" id="pause" src="img/pause-btn.png"/>
         </div>
         <a id="a">MEMORI <?php $valores = explode("x",$_GET["option"]); echo $valores[0]." x ".$valores[1];?></a>
-        <div id="btn-start" class="module">
+        <div id="btn-start" class="module2">
             <img class="btn center" onclick="startTime()" id="start" src="img/play-btn.png"/>
         </div>
+        <div id="btn-save" class="module2 none-display">
+            <img id="save" class="btn center" onclick="darValuesSubmit('<?php echo $_GET["nombre"];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[0];?>','<?php $option = $_GET["option"]; $valores = explode("x",$option); echo $valores[1];?>')" src="img/save.png"/>
+        </div>
+
         <div id="tablero" class="module">
             <div class="mensaje">
                 <h4><p id="mensaje">Suerte, la vas a necesitar!</p></h4>
@@ -28,7 +34,7 @@
                     <p class="div-4">Intentos: <span id="intentos">0</span></p>
                     <p class="div-4">Parejas: <span id="parejas">0</span></p>
                     <p class="div-4">Ayudas restantes: <span id="ayudas">3</span></p>
-                    <p class="div-4">Tiempo: <span id="tiempo">0</span> s</p>
+                    <p class="div-4">Tiempo: <span id="tiempo">00:00</span></p>
                 </h4>
             </div>
             <div id="tablaCartas">

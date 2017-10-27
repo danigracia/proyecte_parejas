@@ -263,6 +263,18 @@ h4{
 
 }
 
+.module2{
+    position:relative;
+    height:70%;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius:5px;
+    background:RGBA(255,255,255,1);
+
+}
+
+
 #a{
     display:block;
     color: #ad5487;
@@ -306,7 +318,14 @@ h4{
 }
 
 #btn-start{
-    margin: 22px 140px;
+    margin: 110px 140px;
+    position: absolute;
+    opacity: 0.9;
+    z-index: 30;
+}
+
+#btn-save{
+    margin: 110px 140px;
     position: absolute;
     opacity: 0.9;
     z-index: 30;
@@ -314,6 +333,10 @@ h4{
 
 .center{
     opacity: 1;
-    margin-top: 255px;
+    margin-top: 162px;
     margin-left: 430px;
+}
+
+.btn:hover{
+    cursor: pointer;
 }

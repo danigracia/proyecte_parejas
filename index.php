@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style_form_initial.css"/>
         <script type="text/javascript" src="js/index.js"></script>
+        <title>New game</title>
         <?php
             session_start();
             if (isset($_SESSION['arrayCartas'])){

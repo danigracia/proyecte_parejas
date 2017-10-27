@@ -11,6 +11,7 @@ var arrayEncontradas = [];
 var tamCarta = "carta4";
 var card = 0;
 var segundos = 1;
+var minutos = 0;
 var contador = null;
 //funcion para reiniciar la partida
 frontDispay();
@@ -26,7 +27,7 @@ function reset() {
     document.getElementById("tiempo").innerHTML = "0";
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("buttonSubmit").setAttribute("src","img/table.png");
-    document.getElementById("btn-start").setAttribute("class","module");
+    document.getElementById("btn-start").setAttribute("class","module2");
     display();
     for(var i = 0; 0<parejasTotales*2;i++){
         document.getElementById("check"+i+"").checked = false;
@@ -84,10 +85,11 @@ function cogerIntentos() {
 function controlParejas() {
     if(parejasTotales==parejasEncontradas){
         setTimeout(sWin,320);
-        document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos y " + segundos + "segundos.";
-        document.getElementById("buttonSubmit").setAttribute("src","img/save.png");
+        document.getElementById("mensaje").innerHTML = "Lo has conseguido!!! Felicidades! Has necesitado " + intentos + " intentos";
         win++;
         pauseTime();
+        showButSave();
+        blockButtons();
     }
 }
 
@@ -145,7 +147,13 @@ function darValuesSubmit(nom, col, fil) {
     document.getElementById("filas").setAttribute('value',fil);
     document.getElementById("columnas").setAttribute('value',col);
     document.getElementById("int").setAttribute('value',intentos);
-    if(win==1)document.getElementById("ganadas").setAttribute('value','1');
+    if(win==1){
+        document.getElementById("ganadas").setAttribute('value','1');
+    }
+    while(minutos>0){
+        minutos--;
+        segundos+= 60;
+    }
     document.getElementById("segundos").setAttribute('value',segundos);
     abrirPag();
 }
@@ -192,11 +200,11 @@ function borrarBorde(numPos) {
 }
 
 function mostrarCartas() {
-    ayudas--;
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("pause").removeAttribute("onclick");
     document.getElementById("ayuda").disabled = true;
-    if(ayudas>=0){
+    if(ayudas>0){
+        ayudas--;
         for(var i = 0; i < parejasTotales*2;i++){
             if(document.getElementById("check"+i+"").checked == true){
                 arrayEncontradas.push(i);
@@ -266,6 +274,7 @@ function tamCard(tam) {
     tamCarta = "carta"+tam;
     card = tam;
 }
+
 function cambiarTamCartas() {
 
     for(var i = 0; i < parejasTotales * 2; i++){
@@ -280,14 +289,44 @@ function startTime() {
     document.getElementById("btn-start").setAttribute("class","none-display");
     segundos = segundos++;
     contador = setInterval(function(){
-        document.getElementById("tiempo").innerHTML = segundos;
+        if(segundos>=60){
+            minutos++;
+            segundos = 0;
+        }
+        if(segundos<10){
+            if(minutos<10)
+                document.getElementById("tiempo").innerHTML = "0"+minutos+":0"+segundos;
+            else{
+                document.getElementById("tiempo").innerHTML = minutos+":0"+segundos;
+            }
+        }
+        else if(segundos>=10)
+            if(minutos<10)
+                document.getElementById("tiempo").innerHTML = "0"+minutos+":"+segundos;
+            else{
+                document.getElementById("tiempo").innerHTML = minutos+":"+segundos;
+            }
         segundos++;
     },1000);
 }
 
 function pauseTime() {
     document.getElementById("ayuda").removeAttribute("onclick");
-    document.getElementById("btn-start").setAttribute("class","module");
+    document.getElementById("btn-start").setAttribute("class","module2");
     document.getElementById("pause").removeAttribute("onclick");
     clearInterval(contador);
+}
+
+function showButSave(){
+    document.getElementById("btn-save").setAttribute("class", "module2");
+    document.getElementById("btn-start").removeAttribute("class");
+    document.getElementById("btn-start").setAttribute("class", "none-display");
+}
+
+function blockButtons() {
+    document.getElementById("ayuda").removeAttribute("onclick");
+    document.getElementById("pause").removeAttribute("onclick");
+    document.getElementById("botonRes").removeAttribute("onclick");
+
+
 }
