@@ -16,15 +16,20 @@ var contador = null;
 //funcion para reiniciar la partida
 frontDispay();
 function reset() {
+    clearInterval(contador);
+    contador = null;
     click = 0;
+    minutos = 0;
+    segundos = 1;
     intentos = 0;
     parejasEncontradas = 0;
     win = 0;
     ayudas = 3;
-    pintarDatosTabla();
+    pintarDatosPartida();
     clearInterval(contador);
     document.getElementById("mensaje").innerHTML = "Suerte, la vas a necesitar!";
-    document.getElementById("tiempo").innerHTML = "0";
+    document.getElementById("tiempo").innerHTML = "00:00";
+    document.getElementById("ayudas").innerHTML = "3";
     document.getElementById("ayuda").removeAttribute("onclick");
     document.getElementById("buttonSubmit").setAttribute("src","img/table.png");
     document.getElementById("btn-start").setAttribute("class","module2");
@@ -41,7 +46,7 @@ function pasarVar(cantidadParejas, tiempoMostrarCarta) {
 }
 
 //funcion que pinta los intentos y parejas actuales
-function pintarDatosTabla(){
+function pintarDatosPartida(){
     document.getElementById("intentos").innerHTML = ""+intentos;
     document.getElementById("parejas").innerHTML = ""+parejasEncontradas;
     document.getElementById("ayudas").innerHTML = ""+ayudas;
@@ -74,11 +79,6 @@ function checkPar(numCarta) {
         return true;
     }
     else return false;
-}
-
-
-function cogerIntentos() {
-    return ""+intentos;
 }
 
 //funcion que controla cuando el usuario ha encontrado todas las parejas posibles y pinta un mensaje para felicitarle.
@@ -123,7 +123,7 @@ function controlCheckFront(numCarta, numPos) {
         }
         setTimeout(borrarBorde,timeShowCard*900,numPos);
         intentos++;
-        pintarDatosTabla();
+        pintarDatosPartida();
         controlParejas();
         frontDispay();
         document.getElementById("ayuda").setAttribute("onclick","mostrarCartas()");
@@ -234,7 +234,7 @@ function ocultarCartas() {
     if(ayudas<3){
         document.getElementById("ayuda").disabled = false;
     }
-    pintarDatosTabla();
+    pintarDatosPartida();
 }
 
 function soundMuted() {

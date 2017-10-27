@@ -42,16 +42,16 @@
                      <table>
                         <tr>
                             <th class='datosth'><p>Nombre 
-                                <img onclick=\"nomAscendente('puntuacionSession')\" src=\"img/up.png\">
-                                <img onclick=\"nomDescendente('puntuacionSession')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacionSession','0')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacionSession','0')\" src=\"img/down.png\">
                             </p></th>
                             <th class='datosth'><p>Intentos 
-                                <img onclick=\"intAscendente('puntuacionSession')\" src=\"img/up.png\">
-                                <img onclick=\"intDescendente('puntuacionSession')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacionSession','1')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacionSession','1')\" src=\"img/down.png\">
                             </p></th>
                             <th class='datosth'><p>Segundos
-                                <img onclick=\"segAscendente('puntuacionSession')\" src=\"img/up.png\">
-                                <img onclick=\"segDescendente('puntuacionSession')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacionSession','2')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacionSession','2')\" src=\"img/down.png\">
                             </p></th>
                         </tr>
                         <tr>
@@ -110,16 +110,16 @@
                      <table>
                         <tr>
                             <th class='datosth'><p>Nombre 
-                                <img onclick=\"nomAscendente('puntuacion')\" src=\"img/up.png\">
-                                <img onclick=\"nomDescendente('puntuacion')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacion','0')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacion','0')\" src=\"img/down.png\">
                             </p></th>
                             <th class='datosth'><p>Intentos 
-                                <img onclick=\"intAscendente('puntuacion')\" src=\"img/up.png\">
-                                <img onclick=\"intDescendente('puntuacion')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacion','1')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacion','1')\" src=\"img/down.png\">
                             </p></th>
                             <th class='datosth'><p>Segundos
-                                <img onclick=\"segAscendente('puntuacion')\" src=\"img/up.png\">
-                                <img onclick=\"segDescendente('puntuacion')\" src=\"img/down.png\">
+                                <img onclick=\"ascendente('puntuacion','2')\" src=\"img/up.png\">
+                                <img onclick=\"descendente('puntuacion','2')\" src=\"img/down.png\">
                             </p></th>
                         </tr>
                         <tr>
