@@ -2,6 +2,8 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style_form_initial.css"/>
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="js/snow.js"></script>
+        <script src="js/jquery.snow.js"></script>
         <title>Nueva partida</title>
         <?php
             session_start();
@@ -43,5 +45,9 @@
         function destroy(){
             session_destroy();
         }
+        $(document).ready( function(){
+            $.fn.snow({ minSize: 5, maxSize: 50, newOn: 120, flakeColor: '#BBABAB' });
+
+        });
     </script>
 </html>

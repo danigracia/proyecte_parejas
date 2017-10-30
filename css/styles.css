@@ -2,6 +2,8 @@ body{
     background-color: #F6F4F4;
 }
 
+html, body{overflow:hidden;}
+
 label {
     border-radius: 30px;
     -webkit-perspective: 1000px;
@@ -260,7 +262,7 @@ h4{
 
     -webkit-box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
     box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
-
+    z-index: 21;
 }
 
 .module2{
@@ -271,6 +273,7 @@ h4{
     margin-right:auto;
     border-radius:5px;
     background:RGBA(255,255,255,1);
+    z-index: 25;
 
 }
 
@@ -311,6 +314,7 @@ h4{
 #btns{
     margin: 5px 5px;
     position: fixed;
+    z-index: 20;
 }
 
 .btn{

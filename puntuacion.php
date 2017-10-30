@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/style_table.css" />
 <script type="text/javascript" src="js/tablesorter.js"></script>
+<script src="js/snow.js"></script>
+<script src="js/jquery.snow.js"></script>
 <title>Puntuación</title>
 
 
@@ -165,7 +167,12 @@
     </div>
 
 </body>
+<script>
+    $(document).ready( function(){
+        $.fn.snow({ minSize: 5, maxSize: 50, newOn: 120, flakeColor: '#BBABAB' });
 
+    });
+</script>
 
 
 

@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 <script type="text/javascript" src="js/functions.js"></script>
+<script src="js/snow.js"></script>
+<script src="js/jquery.snow.js"></script>
 <title>Juego Parejas</title>
 
 <head>
@@ -113,5 +115,11 @@
         </form>
     </div>
 </body>
+<script>
+    $(document).ready( function(){
+        $.fn.snow({ minSize: 5, maxSize: 50, newOn: 120, flakeColor: '#BBABAB' });
+
+    });
+</script>
 
 
